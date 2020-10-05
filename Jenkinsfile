@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "raedbensaid1/hello-kubernetes"
+    registry = "tarekkamoun/helloworld"
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
@@ -39,45 +39,6 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-/**
-  stage('Deploy app to kubernetes') {
-    steps {
-    sshagent(['k8s_ssh']){
-			sh 'scp -o StrictHostKeyChecking=no yaml/hello-deployment.yaml raed@192.168.99.100:~/'
-			sh 'scp -o StrictHostKeyChecking=no yaml/hello-service.yaml raed@192.168.99.100:~/'			
-			script {
-				
-					sh "ssh -o StrictHostKeyChecking=no raed@192.168.99.100 kubectl apply -f hello-deployment.yaml" 
-          sh "ssh -o StrictHostKeyChecking=no raed@192.168.99.100 kubectl apply -f hello-service.yaml"
-				
-       }    
-      
-}
-  
-    
-  steps {
-			dir ('/hello-kubernetes/yaml/') 
-        sh "kubectl --kubeconfig=C:\\Users\\raed\\.kube\\config apply -f hello-deployment.yaml"
-				
-				sh "kubectl --kubeconfig=C:\\Users\\raed\\.kube\\config apply -f hello-service.yaml"
-			}
-
-    
-
-
-}
-    
-  steps {
-			dir ('hello-kubernetes/yaml/') {
-        sh "kubectl  apply -f hello-deployment.yaml"
-				
-				sh "kubectl  apply -f hello-service.yaml"
-			}
-
-}
-
-  }
-  */
 }
   
 }
