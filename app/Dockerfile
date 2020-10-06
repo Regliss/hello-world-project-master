@@ -1,19 +1,16 @@
 FROM node:13.6.0-alpine
 
 # Create app directory
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Install app dependencies
-#COPY package*.json ./
-#ADD package.json /usr/src/app/package.json
-RUN npm cache clean --force
-
+COPY package*.json ./
+RUN rm -rf package-lock.json node_modules
 RUN npm install
 
-RUN npm rebuild bcrypt --build-from-source
-
 # Bundle app source
-#COPY . .
+COPY . /usr/src/app
 
 USER node
 CMD [ "npm", "start" ]

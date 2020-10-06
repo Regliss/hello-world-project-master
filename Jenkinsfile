@@ -16,11 +16,11 @@ pipeline {
     
     stage('Building image') {
       steps{
-  
+          dir ( 'app'){
           script {
            dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
-      }
+      }}
     }
     stage('Publish Image ') {
       steps{

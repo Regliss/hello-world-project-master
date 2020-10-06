@@ -15,6 +15,6 @@ spec:
       containers:
       - name: hello-container
         imagePullPolicy: Always
-        image: paulbouwer/hello-kubernetes:1.8
+        image: tarekkamoun/helloworld:latest
         ports:
         - containerPort: 8080
